@@ -15,10 +15,11 @@ class Sort {
       arr[i] = Integer.parseInt(input[i]);
     }
 
-    print(arr);
+    // print(arr);
     // selectionSort(arr, arr.length);
     // bubbleSort(arr, arr.length);
-    insertionSort(arr, arr.length);
+    // insertionSort(arr, arr.length);
+    mergeSort(arr, 0, arr.length-1);
     print(arr);
     
   }
@@ -80,7 +81,46 @@ class Sort {
   }
 
   static void mergeSort(int[] arr, int l, int r) {
-    
+    if(l<r) {
+      int mid = l+(r-l)/2;
+      mergeSort(arr, l, mid);
+      mergeSort(arr, mid+1, r);
+      merge(arr, l, mid, r);
+    }
+  }
+
+  static void merge(int[] arr, int l, int m, int r) {
+
+    int n1 = m-l+1, n2 = r-m;
+
+    int[] p = new int[n1];
+    int[] q = new int[n2];
+
+    for(int i=0;i<n1;i++) {
+      p[i] = arr[l+i];
+    }
+
+    for(int i=0;i<n2;i++) {
+      q[i] = arr[m+1+i];
+    }
+
+    int i=0,j=0,k=l;
+
+    while(i < n1 && j < n2) {
+      if(p[i] <= q[j]) {
+        arr[k++] =  p[i++];
+      } else {
+        arr[k++] =  q[j++];
+      }
+    }
+
+    while(i<n1) {
+      arr[k++] =  p[i++];
+    }
+
+    while(j<n2) {
+      arr[k++] =  q[j++];
+    }
   }
   
 }
