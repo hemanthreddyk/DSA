@@ -19,7 +19,8 @@ class Sort {
     // selectionSort(arr, arr.length);
     // bubbleSort(arr, arr.length);
     // insertionSort(arr, arr.length);
-    mergeSort(arr, 0, arr.length-1);
+    // mergeSort(arr, 0, arr.length-1);
+    quickSort(arr, 0, arr.length - 1);
     print(arr);
     
   }
@@ -123,4 +124,60 @@ class Sort {
     }
   }
   
+  static void quickSort(int[] arr, int l, int r) {
+    if(l<r) {
+      int p = partition3(arr, l, r);
+
+      quickSort(arr, l, p-1);
+      quickSort(arr, p+1, r);
+    }
+  }
+
+  static int partition1(int[] arr, int l, int r) {
+    int pivot = arr[r];
+    int i = l, j = l;
+
+    while(j < r) {
+      if(arr[j] <= pivot) {
+        swap(arr, i, j);
+        i++;
+        print(arr);
+      }
+      j++;
+    }
+    swap(arr, i, r);
+    return i;
+  }
+
+  static int partition2(int[] arr, int l, int r) {
+    int pivot = arr[l];
+    int i = l + 1, j = l + 1;
+
+    while(j <= r) {
+      if(arr[j] <= pivot) {
+        swap(arr, i++, j);
+        print(arr);
+      }
+      j++;
+    }
+    swap(arr, i-1, l);
+    return i-1;
+  }
+
+  static int partition3(int[] arr, int l, int r) {
+    int pivot = arr[l];
+    int i = l, j = r;
+
+    while(i < j) {
+      while(i<r && arr[i] <= pivot) {
+        i++;
+      }
+      while(j>=l && arr[j] > pivot) {
+        j--;
+      }
+      if(i<j) swap(arr, i, j);
+    }
+    swap(arr, l, j);
+    return j;
+  }
 }
